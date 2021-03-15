@@ -1,6 +1,6 @@
 ## Objetive
 
-Implement an infrastructure with different services, each one with its own rules. Using **kubernetes**.
+Implement an infrastructure with different services, each one with its own rules. Using **kubernetes** (minikube cluster).
 
 Each services has to work in a dedicated container.
 
