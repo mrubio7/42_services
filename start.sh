@@ -26,5 +26,4 @@ echo "${G}Deploying images into pods${END}"
 kubectl apply -f ./srcs/nginx/nginx.yaml
 kubectl expose deployment nginx --name=nginx --type=LoadBalancer
 
-
 minikube dashboard
