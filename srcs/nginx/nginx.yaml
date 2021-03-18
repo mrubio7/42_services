@@ -8,6 +8,8 @@ metadata:
 spec:
   selector:
     app: nginx
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.240
   ports:
   - name: http
     port: 80
@@ -18,7 +20,6 @@ spec:
   - name: ssh
     port: 22
     targetPort: 22
-  type: LoadBalancer
   status:
   loadBalancer: {}
 
@@ -41,6 +42,9 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx
+        image: my-nginx
+        imagePullPolicy: Never
         ports:
+        - containerPort: 443
         - containerPort: 80
+        - containerPort: 22

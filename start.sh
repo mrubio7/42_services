@@ -10,8 +10,10 @@ echo "${G}Deleting old MINIKUBE${END}"
 minikube stop
 minikube delete
 
-echo "${G}Starting MINIKUBE on VirtualBox${END}"
-minikube start localhost:5000 driver=virtualbox
+echo "${G}Starting MINIKUBE${END}"
+minikube start --vm-driver=virtualbox
+
+eval $(minikube docker-env)
 
 #Load Balancer
 minikube addons enable metallb
@@ -19,7 +21,7 @@ kubectl apply -f ./srcs/metallb/metallb.yaml
 
 #Building images
 echo "${G}Creating docker images${END}"
-docker build --quiet ./srcs/nginx -t nginx #-----------NGINX
+docker build --quiet ./srcs/nginx -t my-nginx #-----------NGINX
 
 #Deploying images
 echo "${G}Deploying images into pods${END}"
