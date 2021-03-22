@@ -3,6 +3,7 @@ END=$'\e[0m'
 G=$'\e[32m'
 R=$'\e[31m'
 B=$'\e[34m'
+#________________
 
 clear
 
@@ -22,11 +23,15 @@ kubectl apply -f ./srcs/metallb/metallb.yaml
 #Building images
 echo "${B}Creating docker images${END}"
 docker build --quiet ./srcs/nginx -t my-nginx #-----------NGINX
+docker build --quiet ./srcs/mysql -t my-mysql #-----------MYSQL
 
 #Deploying images
-echo "${B}Deploying images into pods${END}"
+echo "${B}Deploying images${END}"
 kubectl apply -f ./srcs/nginx/nginx.yaml
 kubectl expose deployment nginx --name=nginx --type=LoadBalancer
+
+kubectl apply -f ./srcs/mysql/mysql.yaml
+kubectl expose deployment mysql --name=mysql --type=ClusterIP
 
 echo "${B}NGINX IP:${END} ${G}192.168.99.100:80${END}"
 echo "${B}MYSQL IP:${END} ${G}0.0.0.0:${END}"
